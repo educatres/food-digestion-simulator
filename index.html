@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="可互動的消化道食物旅程模擬器，適合課堂教學與自主學習。" />
+  <title>消化道大冒險｜食物旅程模擬器</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">互動式生物教學工具</p>
+      <h1>消化道大冒險</h1>
+      <p>選擇一餐中的食物，拖動時間軸，觀察它們在口腔、胃、小腸與大腸中的位置與狀態。</p>
+    </div>
+    <div class="hero-actions">
+      <button id="startTourBtn" class="secondary">教學導覽</button>
+      <button id="resetBtn" class="danger">重新開始</button>
+    </div>
+  </header>
+
+  <main class="app-shell">
+    <section class="panel food-panel" aria-labelledby="foodTitle">
+      <div class="panel-heading">
+        <div>
+          <p class="step-label">步驟 1</p>
+          <h2 id="foodTitle">選擇這一餐</h2>
+        </div>
+        <span id="selectedCount" class="badge">0 種</span>
+      </div>
+
+      <div id="foodGrid" class="food-grid"></div>
+
+      <div class="controls-stack">
+        <label>
+          份量
+          <select id="portionSelect">
+            <option value="0.8">少量</option>
+            <option value="1" selected>一般</option>
+            <option value="1.25">大量</option>
+          </select>
+        </label>
+        <label>
+          咀嚼程度
+          <select id="chewSelect">
+            <option value="1.2">咀嚼不足</option>
+            <option value="1" selected>一般</option>
+            <option value="0.85">充分咀嚼</option>
+          </select>
+        </label>
+      </div>
+
+      <button id="loadMealBtn" class="primary full">把食物放入消化道</button>
+      <p class="fine-print">時間為教學用簡化估計，不代表每個人的實際消化速度。</p>
+    </section>
+
+    <section class="panel simulator-panel" aria-labelledby="simTitle">
+      <div class="panel-heading simulator-heading">
+        <div>
+          <p class="step-label">步驟 2</p>
+          <h2 id="simTitle">拖動時間，追蹤食物</h2>
+        </div>
+        <div class="time-readout">
+          <span>進食後</span>
+          <strong id="timeLabel">0 分鐘</strong>
+        </div>
+      </div>
+
+      <div class="simulator-layout">
+        <div class="body-stage" id="bodyStage">
+          <svg class="body-svg" viewBox="0 0 520 760" role="img" aria-label="人體消化道示意圖">
+            <defs>
+              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="6" stdDeviation="6" flood-opacity="0.15" />
+              </filter>
+            </defs>
+            <path class="body-silhouette" d="M260 34c-55 0-91 43-91 98 0 28 11 51 30 69-58 21-103 70-113 133L45 666c-4 28 17 53 46 53h338c29 0 50-25 46-53l-41-332c-10-63-55-112-113-133 19-18 30-41 30-69 0-55-36-98-91-98z" />
+            <circle class="organ mouth" cx="260" cy="112" r="20" data-organ="mouth" />
+            <path class="organ esophagus" d="M260 132 C248 186, 274 220, 258 280" data-organ="esophagus" />
+            <path class="organ stomach" d="M258 278 C220 270, 198 308, 207 354 C216 397, 268 405, 299 378 C327 354, 318 297, 279 288 Z" data-organ="stomach" />
+            <path class="organ small-intestine" d="M210 430 C155 420, 149 493, 205 496 C266 500, 265 555, 207 561 C152 566, 160 631, 221 622 C277 613, 300 575, 276 537 C252 499, 286 460, 330 468 C373 475, 376 535, 335 548" data-organ="smallIntestine" />
+            <path class="organ large-intestine" d="M182 417 C140 434, 130 477, 138 540 C146 612, 184 650, 245 648 C313 646, 371 620, 382 548 C392 480, 371 430, 332 414" data-organ="largeIntestine" />
+            <path class="organ rectum" d="M260 648 L260 704" data-organ="rectum" />
+          </svg>
+
+          <div id="foodParticles" class="food-particles" aria-live="polite"></div>
+          <div class="organ-labels" aria-hidden="true">
+            <span style="left:52%;top:12%">口腔</span>
+            <span style="left:61%;top:26%">食道</span>
+            <span style="left:64%;top:43%">胃</span>
+            <span style="left:67%;top:63%">小腸</span>
+            <span style="left:18%;top:66%">大腸</span>
+            <span style="left:54%;top:91%">直腸</span>
+          </div>
+        </div>
+
+        <aside class="info-card" id="infoCard">
+          <p class="step-label">即時狀態</p>
+          <h3 id="focusFoodName">尚未開始</h3>
+          <div id="focusSwatch" class="focus-swatch"></div>
+          <dl class="status-list">
+            <div><dt>目前位置</dt><dd id="focusOrgan">—</dd></div>
+            <div><dt>食物狀態</dt><dd id="focusState">—</dd></div>
+            <div><dt>消化程度</dt><dd id="focusDigestion">—</dd></div>
+            <div><dt>已吸收比例</dt><dd id="focusAbsorption">—</dd></div>
+            <div><dt>下一階段</dt><dd id="focusNext">—</dd></div>
+          </dl>
+          <div class="progress-block">
+            <span>消化進度</span>
+            <div class="progress-track"><div id="digestProgress" class="progress-fill"></div></div>
+          </div>
+          <p id="scienceNote" class="science-note">先選擇食物，再開始模擬。</p>
+        </aside>
+      </div>
+
+      <div class="timeline-card">
+        <div class="playback-controls">
+          <button id="playBtn" class="icon-btn" aria-label="播放">▶</button>
+          <button id="prevBtn" class="icon-btn" aria-label="上一個階段">⏮</button>
+          <button id="nextBtn" class="icon-btn" aria-label="下一個階段">⏭</button>
+          <label>
+            速度
+            <select id="speedSelect">
+              <option value="60">1×</option>
+              <option value="300" selected>5×</option>
+              <option value="900">15×</option>
+              <option value="3600">60×</option>
+            </select>
+          </label>
+        </div>
+        <input id="timeline" type="range" min="0" max="4320" value="0" step="1" aria-label="消化時間軸" />
+        <div class="timeline-marks">
+          <span>0 分</span><span>6 小時</span><span>12 小時</span><span>24 小時</span><span>48 小時</span><span>72 小時</span>
+        </div>
+      </div>
+
+      <div id="mealLegend" class="meal-legend"></div>
+    </section>
+  </main>
+
+  <section class="learning-section">
+    <div class="learning-card">
+      <p class="step-label">觀察重點</p>
+      <h2>同一餐中的食物，不一定一起前進</h2>
+      <p>液體通常較快離開胃部；高脂肪、顆粒較大或較難消化的固體，往往會停留較久。蔬菜中的營養可被吸收，但部分纖維會進入大腸。</p>
+    </div>
+    <div class="learning-card challenge-card">
+      <p class="step-label">挑戰題</p>
+      <h2 id="challengeQuestion">水、米飯與牛排，誰通常最早離開胃？</h2>
+      <div class="challenge-options">
+        <button data-answer="water">水</button>
+        <button data-answer="rice">米飯</button>
+        <button data-answer="steak">牛排</button>
+      </div>
+      <p id="challengeFeedback" class="challenge-feedback"></p>
+    </div>
+  </section>
+
+  <dialog id="tourDialog">
+    <h2>操作方式</h2>
+    <ol>
+      <li>從左側勾選一種或多種食物。</li>
+      <li>設定份量與咀嚼程度，再按「把食物放入消化道」。</li>
+      <li>拖動時間軸，或按播放，查看每種食物在消化道中的位置。</li>
+      <li>點選彩色食物粒子或下方圖例，查看個別食物狀態。</li>
+    </ol>
+    <button id="closeTourBtn" class="primary">開始探索</button>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
