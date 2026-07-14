@@ -80,8 +80,46 @@ button:hover { transform: translateY(-1px); }
   cursor: pointer;
   min-height: 72px;
 }
-.food-card input { position: absolute; opacity: 0; pointer-events: none; }
-.food-card.selected { outline: 3px solid rgba(36,135,109,.18); border-color: var(--primary); }
+.food-card input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.food-check {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #b7c9bf;
+  border-radius: 7px;
+  background: #fff;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  transition: .18s ease;
+}
+.food-check::after {
+  content: "✓";
+  color: white;
+  font-size: .9rem;
+  font-weight: 900;
+  line-height: 1;
+  opacity: 0;
+  transform: scale(.7);
+  transition: .18s ease;
+}
+.food-card.selected {
+  outline: 3px solid rgba(36,135,109,.18);
+  border-color: var(--primary);
+  background: #f7fcfa;
+}
+.food-card.selected .food-check {
+  border-color: var(--primary);
+  background: var(--primary);
+}
+.food-card.selected .food-check::after {
+  opacity: 1;
+  transform: scale(1);
+}
 .food-icon { font-size: 1.65rem; }
 .food-card strong { display:block; font-size: .95rem; }
 .food-card small { color: var(--muted); font-size: .75rem; }

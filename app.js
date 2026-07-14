@@ -32,16 +32,17 @@ function renderFoodCards(){
   els.foodGrid.innerHTML = FOODS.map(food => `
     <label class="food-card" data-id="${food.id}">
       <input type="checkbox" value="${food.id}" />
+      <span class="food-check" aria-hidden="true"></span>
       <span class="food-icon">${food.icon}</span>
       <span><strong>${food.name}</strong><small>${food.category}</small></span>
     </label>
   `).join('');
-  els.foodGrid.querySelectorAll('.food-card').forEach(card => {
-    card.addEventListener('click', () => {
+  els.foodGrid.querySelectorAll('.food-card input').forEach(input => {
+    input.addEventListener('change', () => {
+      const card = input.closest('.food-card');
       const id = card.dataset.id;
-      state.selected.has(id) ? state.selected.delete(id) : state.selected.add(id);
-      card.classList.toggle('selected', state.selected.has(id));
-      card.querySelector('input').checked = state.selected.has(id);
+      input.checked ? state.selected.add(id) : state.selected.delete(id);
+      card.classList.toggle('selected', input.checked);
       els.selectedCount.textContent = `${state.selected.size} 種`;
     });
   });
