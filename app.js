@@ -13,12 +13,12 @@ const FOODS = [
 ];
 
 const ORGANS = [
-  { key:'mouth', name:'口腔', start:0, duration:3, pos:[50,14], state:'咀嚼並與唾液混合', digest:.03, absorb:0 },
-  { key:'esophagus', name:'食道', start:3, duration:2, pos:[50,28], state:'食團經由蠕動向胃移動', digest:.05, absorb:0 },
-  { key:'stomach', name:'胃', pos:[52,43], state:'攪拌、研磨並形成食糜', digest:.35, absorb:.03 },
-  { key:'smallIntestine', name:'小腸', pos:[53,67], state:'酵素分解與營養吸收', digest:.9, absorb:.82 },
-  { key:'largeIntestine', name:'大腸', pos:[44,75], state:'回收水分並形成殘渣', digest:1, absorb:.94 },
-  { key:'rectum', name:'直腸', pos:[50,92], state:'儲存殘渣，準備排出', digest:1, absorb:.95 },
+  { key:'mouth', name:'口腔', start:0, duration:3, pos:[50,15], state:'咀嚼並與唾液混合', digest:.03, absorb:0 },
+  { key:'esophagus', name:'食道', start:3, duration:2, pos:[50,29], state:'食團經由蠕動向胃移動', digest:.05, absorb:0 },
+  { key:'stomach', name:'胃', pos:[50,46], state:'攪拌、研磨並形成食糜', digest:.35, absorb:.03 },
+  { key:'smallIntestine', name:'小腸', pos:[52,70], state:'酵素分解與營養吸收', digest:.9, absorb:.82 },
+  { key:'largeIntestine', name:'大腸', pos:[49,74], state:'回收水分並形成殘渣', digest:1, absorb:.94 },
+  { key:'rectum', name:'直腸', pos:[50,91], state:'儲存殘渣，準備排出', digest:1, absorb:.95 },
   { key:'out', name:'已排出體外', pos:[50,98], state:'旅程完成', digest:1, absorb:.95 }
 ];
 
