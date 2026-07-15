@@ -161,21 +161,21 @@ select {
 .food-particles { position:absolute; inset:0; pointer-events:none; }
 .food-particle {
   position:absolute;
-  width: 34px;
-  height: 34px;
+  width: 68px;
+  height: 68px;
   border-radius: 50%;
   display:grid;
   place-items:center;
   color:white;
-  font-size: 16px;
+  font-size: 32px;
   font-weight:900;
-  border: 3px solid rgba(255,255,255,.86);
-  box-shadow: 0 7px 16px rgba(38,53,47,.25);
+  border: 5px solid rgba(255,255,255,.86);
+  box-shadow: 0 10px 22px rgba(38,53,47,.28);
   transform: translate(-50%, -50%);
   transition: left .25s linear, top .25s linear, transform .2s ease, opacity .2s ease;
   pointer-events:auto;
 }
-.food-particle:hover, .food-particle.focused { transform: translate(-50%, -50%) scale(1.18); z-index:10; }
+.food-particle:hover, .food-particle.focused { transform: translate(-50%, -50%) scale(1.08); z-index:10; }
 .info-card {
   background: #20372f;
   color: white;

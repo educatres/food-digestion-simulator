@@ -100,7 +100,7 @@ function stageData(organ, progress, food){
 
 function hashOffset(id){
   const n = [...id].reduce((a,c)=>a+c.charCodeAt(0),0);
-  return { x:(n%9)-4, y:((n*3)%7)-3 };
+  return { x:((n%9)-4) * 1.7, y:(((n*3)%7)-3) * 1.7 };
 }
 
 function renderSimulation(){
