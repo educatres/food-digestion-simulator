@@ -69,51 +69,9 @@
 
       <div class="simulator-layout">
         <div class="body-stage" id="bodyStage">
-          <svg class="body-svg" viewBox="0 0 520 760" role="img" aria-label="人體消化道示意圖">
-            <defs>
-              <linearGradient id="tubeGradient" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stop-color="#f8b49d" />
-                <stop offset="58%" stop-color="#ed846f" />
-                <stop offset="100%" stop-color="#c75f4d" />
-              </linearGradient>
-              <linearGradient id="colonGradient" x1="0" x2="1" y1="0" y2="1">
-                <stop offset="0%" stop-color="#d58b63" />
-                <stop offset="100%" stop-color="#9d563c" />
-              </linearGradient>
-              <radialGradient id="stomachGradient" cx="42%" cy="38%" r="72%">
-                <stop offset="0%" stop-color="#ffc6ae" />
-                <stop offset="58%" stop-color="#f08a72" />
-                <stop offset="100%" stop-color="#c75e4e" />
-              </radialGradient>
-              <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-                <feDropShadow dx="0" dy="6" stdDeviation="6" flood-opacity="0.15" />
-              </filter>
-            </defs>
-            <path class="body-silhouette" d="M260 34c-55 0-91 43-91 98 0 28 11 51 30 69-58 21-103 70-113 133L45 666c-4 28 17 53 46 53h338c29 0 50-25 46-53l-41-332c-10-63-55-112-113-133 19-18 30-41 30-69 0-55-36-98-91-98z" />
-            <g class="digestive-system">
-              <path class="organ mouth" d="M220 113 C232 88, 288 88, 300 113 C286 134, 236 134, 220 113 Z" data-organ="mouth" />
-              <path class="mouth-line" d="M230 113 C245 121, 276 121, 291 113" />
-              <path class="organ esophagus" d="M260 126 C258 166, 266 199, 263 235 C260 268, 249 291, 250 316" data-organ="esophagus" />
-              <path class="organ stomach" d="M250 303 C219 288, 190 304, 184 339 C176 384, 216 417, 263 407 C304 398, 337 365, 325 326 C318 300, 291 290, 269 303 C262 307, 256 307, 250 303 Z" data-organ="stomach" />
-              <path class="stomach-exit" d="M303 386 C318 399, 321 421, 303 434" />
-              <path class="organ large-intestine" d="M176 598 C134 571, 126 510, 139 457 C151 408, 191 386, 260 386 C330 386, 372 409, 384 458 C398 513, 385 574, 343 601" data-organ="largeIntestine" />
-              <path class="organ small-intestine" d="M302 432 C260 423, 222 434, 207 462 C191 492, 220 514, 264 503 C312 491, 337 519, 315 550 C292 583, 220 558, 202 595 C188 626, 231 644, 276 630 C323 615, 343 580, 325 547 C309 516, 264 525, 247 548 C231 569, 249 588, 287 586" data-organ="smallIntestine" />
-              <path class="organ rectum" d="M262 670 C260 688, 260 707, 260 724" data-organ="rectum" />
-              <path class="organ-highlight esophagus-highlight" d="M254 138 C252 177, 259 204, 256 234" />
-              <path class="organ-highlight colon-highlight" d="M158 578 C139 539, 140 474, 162 436 C184 399, 220 402, 260 402" />
-              <path class="organ-highlight small-highlight" d="M219 466 C231 452, 267 447, 293 452 M218 604 C237 619, 283 614, 305 594" />
-            </g>
-          </svg>
+          <img class="body-image" src="assets/digestive-system-zh-hant.svg" alt="人體消化系統示意圖" />
 
           <div id="foodParticles" class="food-particles" aria-live="polite"></div>
-          <div class="organ-labels" aria-hidden="true">
-            <span style="left:57%;top:12%">口腔</span>
-            <span style="left:61%;top:26%">食道</span>
-            <span style="left:64%;top:43%">胃</span>
-            <span style="left:67%;top:63%">小腸</span>
-            <span style="left:18%;top:56%">大腸</span>
-            <span style="left:54%;top:91%">直腸</span>
-          </div>
         </div>
 
         <aside class="info-card" id="infoCard">

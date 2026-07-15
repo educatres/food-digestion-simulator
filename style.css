@@ -142,70 +142,22 @@ select {
 .body-stage {
   height: clamp(410px, 58vh, 500px);
   min-height: 0;
-  background: linear-gradient(180deg, #f7fbf9, #edf6f1);
+  background: #f7fbf9;
   border-radius: 24px;
   border: 1px solid var(--line);
   position: relative;
   overflow: hidden;
+  display: grid;
+  place-items: center;
 }
-.body-svg { width: 100%; height: 100%; display:block; }
-.body-silhouette { fill: #f8d7c8; stroke: #e7bda9; stroke-width: 3; opacity: .66; }
-.digestive-system { filter: url(#softShadow); }
-.organ { stroke-linecap: round; stroke-linejoin: round; }
-.mouth {
-  fill: #e96e81;
-  stroke: #b94a59;
-  stroke-width: 5;
+.body-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
-.mouth-line {
-  fill: none;
-  stroke: rgba(255,255,255,.72);
-  stroke-width: 5;
-  stroke-linecap: round;
-}
-.esophagus {
-  fill: none;
-  stroke: url(#tubeGradient);
-  stroke-width: 22;
-}
-.stomach {
-  fill: url(#stomachGradient);
-  stroke: #b95142;
-  stroke-width: 7;
-}
-.stomach-exit {
-  fill: none;
-  stroke: url(#tubeGradient);
-  stroke-width: 17;
-  stroke-linecap: round;
-}
-.small-intestine {
-  fill: none;
-  stroke: url(#tubeGradient);
-  stroke-width: 28;
-}
-.large-intestine {
-  fill: none;
-  stroke: url(#colonGradient);
-  stroke-width: 32;
-  opacity: .96;
-}
-.rectum {
-  fill: none;
-  stroke: #8d4c37;
-  stroke-width: 22;
-}
-.organ-highlight {
-  fill: none;
-  stroke: rgba(255,255,255,.42);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  pointer-events: none;
-}
-.esophagus-highlight { stroke-width: 5; }
-.colon-highlight { stroke-width: 6; }
-.small-highlight { stroke-width: 5; }
-.organ-labels span { position:absolute; background:rgba(255,255,255,.86); border-radius:999px; padding:4px 8px; font-size:.72rem; font-weight:800; box-shadow:0 4px 12px rgba(0,0,0,.07); }
 .food-particles { position:absolute; inset:0; pointer-events:none; }
 .food-particle {
   position:absolute;

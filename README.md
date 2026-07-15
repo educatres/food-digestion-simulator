@@ -39,3 +39,7 @@ http://localhost:8000
 ## 科學說明
 
 本網站中的時間與消化比例為教學用簡化模型。真實人體消化速度會受到個人體質、食物份量、脂肪含量、咀嚼程度、健康狀況與其他因素影響，不應用於醫療診斷。
+
+## 圖片來源
+
+消化系統示意圖取自 Wikimedia Commons：`Digestive_system_diagram_zh-hant.svg`。
